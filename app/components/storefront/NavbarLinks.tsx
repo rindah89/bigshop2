@@ -12,7 +12,7 @@ export const navbarLinks = [
   },
   {
     id: 1,
-    name: "All Products",
+    name: "All",
     href: "/products/all",
   },
   {
@@ -27,7 +27,7 @@ export const navbarLinks = [
   },
   {
     id: 4,
-    name: "General Electronics",
+    name: "General ",
     href: "/products/general",
   },
 ];

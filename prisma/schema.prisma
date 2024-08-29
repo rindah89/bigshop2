@@ -66,5 +66,9 @@ enum ProductStatus {
 enum Category {
   phones
   laptops
+  phoneCases
+  headphones
+  televisions
+  cameras
   general
 }
