@@ -31,6 +31,7 @@ model Product {
   description String
   status      ProductStatus
   price       Int
+  quantity    Int           @default(0)
   images      String[]
   category    Category
   isFeatured  Boolean       @default(false)

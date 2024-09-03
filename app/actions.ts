@@ -40,6 +40,8 @@ export async function createProduct(prevState: unknown, formData: FormData) {
       images: flattenUrls,
       category: submission.value.category,
       isFeatured: submission.value.isFeatured === true ? true : false,
+      quantity: submission.value.quantity,  // Add this line
+
     },
   });
 
@@ -79,6 +81,8 @@ export async function editProduct(prevState: any, formData: FormData) {
       isFeatured: submission.value.isFeatured === true ? true : false,
       status: submission.value.status,
       images: flattenUrls,
+      quantity: submission.value.quantity,  // Add this line
+
     },
   });
 
@@ -153,62 +157,47 @@ export async function addItem(productId: string) {
     return redirect("/");
   }
 
-  let cart: Cart | null = await redis.get(`cart-${user.id}`);
-
-  const selectedProduct = await prisma.product.findUnique({
-    select: {
-      id: true,
-      name: true,
-      price: true,
-      images: true,
-    },
-    where: {
-      id: productId,
-    },
+  const product = await prisma.product.findUnique({
+    where: { id: productId },
+    select: { id: true, name: true, price: true, images: true, quantity: true },
   });
 
-  if (!selectedProduct) {
-    throw new Error("No product with this id");
+  if (!product) {
+    throw new Error("Product not found");
   }
-  let myCart = {} as Cart;
 
-  if (!cart || !cart.items) {
-    myCart = {
-      userId: user.id,
-      items: [
-        {
-          price: selectedProduct.price,
-          id: selectedProduct.id,
-          imageString: selectedProduct.images[0],
-          name: selectedProduct.name,
-          quantity: 1,
-        },
-      ],
-    };
-  } else {
-    let itemFound = false;
+  if (product.quantity < 1) {
+    throw new Error("Product is out of stock");
+  }
 
-    myCart.items = cart.items.map((item) => {
-      if (item.id === productId) {
-        itemFound = true;
-        item.quantity += 1;
-      }
+  let cart: Cart | null = await redis.get(`cart-${user.id}`);
 
-      return item;
-    });
+  if (!cart) {
+    cart = { userId: user.id, items: [] };
+  }
 
-    if (!itemFound) {
-      myCart.items.push({
-        id: selectedProduct.id,
-        imageString: selectedProduct.images[0],
-        name: selectedProduct.name,
-        price: selectedProduct.price,
-        quantity: 1,
-      });
+  const existingItemIndex = cart.items.findIndex(item => item.id === productId);
+
+  if (existingItemIndex > -1) {
+    const existingItem = cart.items[existingItemIndex];
+    if (existingItem.quantity < product.quantity) {
+      existingItem.quantity += 1;
+    } else {
+      throw new Error("Cannot add more of this item");
     }
+  } else {
+    const newItem: CartItem = {
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      quantity: 1,
+      imageString: product.images[0],
+      stockQuantity: product.quantity,
+    };
+    cart.items.push(newItem);
   }
 
-  await redis.set(`cart-${user.id}`, myCart);
+  await redis.set(`cart-${user.id}`, cart);
 
   revalidatePath("/", "layout");
 }

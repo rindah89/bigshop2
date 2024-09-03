@@ -3,6 +3,8 @@ import Link from "next/link";
 import headphones from "@/public/headphones.jpg";
 import phones from "@/public/phones.jpg";
 import laptop from "@/public/laptop.jpg";
+import phonec from "@/public/phonec.jpeg";
+import tele from "@/public/tele.webp"
 
 export function CategoriesSelection() {
   return (
@@ -23,11 +25,11 @@ export function CategoriesSelection() {
       <div className="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:grid-rows-2 sm:gap-x-6 lg:gap-8">
         <div className="group aspect-w-2 aspect-h-1 rounded-xl overflow-hidden sm:aspect-w-1 sm:row-span-2">
           <Image
-            src={headphones}
-            alt="All Products Image"
-            className="object-cover object-center "
+              src={headphones}
+              alt="All Products Image"
+              className="object-cover object-center "
           />
-          <div className="bg-gradient-to-b from-transparent to-black opacity-55" />
+          <div className="bg-gradient-to-b from-transparent to-black opacity-55"/>
           <div className="p-6 flex items-end">
             <Link href="/products/all">
               <h3 className="text-white font-semibold">All Products</h3>
@@ -38,11 +40,11 @@ export function CategoriesSelection() {
 
         <div className="group aspect-w-2 aspect-h-1 rounded-lg overflow-hidden sm:relative sm:aspect-none sm:h-full">
           <Image
-            src={phones}
-            alt="Phones and accessories"
-            className="object-bottom object-cover sm:absolute sm:inset-0 sm:w-full sm:h-full"
+              src={phones}
+              alt="Phones and accessories"
+              className="object-bottom object-cover sm:absolute sm:inset-0 sm:w-full sm:h-full"
           />
-          <div className="bg-gradient-to-b from-transparent to-black opacity-55 sm:absolute sm:inset-0" />
+          <div className="bg-gradient-to-b from-transparent to-black opacity-55 sm:absolute sm:inset-0"/>
           <div className="p-6 flex items-end sm:absolute sm:inset-0">
             <Link href="/products/phones">
               <h3 className="text-white font-semibold">Phones & Accessories</h3>
@@ -53,11 +55,11 @@ export function CategoriesSelection() {
 
         <div className="group aspect-w-2 aspect-h-1 rounded-lg overflow-hidden sm:relative sm:aspect-none sm:h-full">
           <Image
-            src={laptop}
-            alt="Women product image"
-            className="object-bottom object-cover sm:absolute sm:inset-0 sm:w-full sm:h-full"
+              src={laptop}
+              alt="Women product image"
+              className="object-bottom object-cover sm:absolute sm:inset-0 sm:w-full sm:h-full"
           />
-          <div className="bg-gradient-to-b from-transparent to-black opacity-55 sm:absolute sm:inset-0" />
+          <div className="bg-gradient-to-b from-transparent to-black opacity-55 sm:absolute sm:inset-0"/>
           <div className="p-6 flex items-end sm:absolute sm:inset-0">
             <Link href="/products/laptops">
               <h3 className="text-white font-semibold">Laptops & Accessories</h3>
@@ -65,6 +67,8 @@ export function CategoriesSelection() {
             </Link>
           </div>
         </div>
+
+
       </div>
     </div>
   );

@@ -75,12 +75,12 @@ export default function ProductCreateRoute() {
             <div className="flex flex-col gap-3">
               <Label>Name</Label>
               <Input
-                type="text"
-                key={fields.name.key}
-                name={fields.name.name}
-                defaultValue={fields.name.initialValue}
-                className="w-full"
-                placeholder="Product Name"
+                  type="text"
+                  key={fields.name.key}
+                  name={fields.name.name}
+                  defaultValue={fields.name.initialValue}
+                  className="w-full"
+                  placeholder="Product Name"
               />
 
               <p className="text-red-500">{fields.name.errors}</p>
@@ -89,31 +89,42 @@ export default function ProductCreateRoute() {
             <div className="flex flex-col gap-3">
               <Label>Description</Label>
               <Textarea
-                key={fields.description.key}
-                name={fields.description.name}
-                defaultValue={fields.description.initialValue}
-                placeholder="Write your description right here..."
+                  key={fields.description.key}
+                  name={fields.description.name}
+                  defaultValue={fields.description.initialValue}
+                  placeholder="Write your description right here..."
               />
               <p className="text-red-500">{fields.description.errors}</p>
             </div>
             <div className="flex flex-col gap-3">
               <Label>Price</Label>
               <Input
-                key={fields.price.key}
-                name={fields.price.name}
-                defaultValue={fields.price.initialValue}
-                type="number"
-                placeholder="$55"
+                  key={fields.price.key}
+                  name={fields.price.name}
+                  defaultValue={fields.price.initialValue}
+                  type="number"
+                  placeholder="20000 CFA"
               />
               <p className="text-red-500">{fields.price.errors}</p>
             </div>
 
             <div className="flex flex-col gap-3">
+              <Label>Quantity</Label>
+              <Input
+                  key={fields.quantity.key}
+                  name={fields.quantity.name}
+                  defaultValue={fields.quantity.initialValue}
+                  type="number"
+                  placeholder="How many do you have in stock"
+              />
+              <p className="text-red-500">{fields.price.errors}</p>
+            </div>
+            <div className="flex flex-col gap-3">
               <Label>Featured Product</Label>
               <Switch
-                key={fields.isFeatured.key}
-                name={fields.isFeatured.name}
-                defaultValue={fields.isFeatured.initialValue}
+                  key={fields.isFeatured.key}
+                  name={fields.isFeatured.name}
+                  defaultValue={fields.isFeatured.initialValue}
               />
               <p className="text-red-500">{fields.isFeatured.errors}</p>
             </div>
@@ -121,12 +132,12 @@ export default function ProductCreateRoute() {
             <div className="flex flex-col gap-3">
               <Label>Status</Label>
               <Select
-                key={fields.status.key}
-                name={fields.status.name}
-                defaultValue={fields.status.initialValue}
+                  key={fields.status.key}
+                  name={fields.status.name}
+                  defaultValue={fields.status.initialValue}
               >
                 <SelectTrigger>
-                  <SelectValue placeholder="Select Status" />
+                  <SelectValue placeholder="Select Status"/>
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="draft">Draft</SelectItem>
@@ -140,18 +151,18 @@ export default function ProductCreateRoute() {
             <div className="flex flex-col gap-3">
               <Label>Category</Label>
               <Select
-                key={fields.category.key}
-                name={fields.category.name}
-                defaultValue={fields.category.initialValue}
+                  key={fields.category.key}
+                  name={fields.category.name}
+                  defaultValue={fields.category.initialValue}
               >
                 <SelectTrigger>
-                  <SelectValue placeholder="Select Category" />
+                  <SelectValue placeholder="Select Category"/>
                 </SelectTrigger>
                 <SelectContent>
                   {categories.map((category) => (
-                    <SelectItem key={category.id} value={category.name}>
-                      {category.title}
-                    </SelectItem>
+                      <SelectItem key={category.id} value={category.name}>
+                        {category.title}
+                      </SelectItem>
                   ))}
                 </SelectContent>
               </Select>
@@ -161,44 +172,44 @@ export default function ProductCreateRoute() {
             <div className="flex flex-col gap-3">
               <Label>Images</Label>
               <input
-                type="hidden"
-                value={images}
-                key={fields.images.key}
-                name={fields.images.name}
-                defaultValue={fields.images.initialValue as any}
+                  type="hidden"
+                  value={images}
+                  key={fields.images.key}
+                  name={fields.images.name}
+                  defaultValue={fields.images.initialValue as any}
               />
               {images.length > 0 ? (
-                <div className="flex gap-5">
-                  {images.map((image, index) => (
-                    <div key={index} className="relative w-[100px] h-[100px]">
-                      <Image
-                        height={100}
-                        width={100}
-                        src={image}
-                        alt="Product Image"
-                        className="w-full h-full object-cover rounded-lg border"
-                      />
+                  <div className="flex gap-5">
+                    {images.map((image, index) => (
+                        <div key={index} className="relative w-[100px] h-[100px]">
+                          <Image
+                              height={100}
+                              width={100}
+                              src={image}
+                              alt="Product Image"
+                              className="w-full h-full object-cover rounded-lg border"
+                          />
 
-                      <button
-                        onClick={() => handleDelete(index)}
-                        type="button"
-                        className="absolute -top-3 -right-3 bg-red-500 p-2 rounded-lg text-white"
-                      >
-                        <XIcon className="w-3 h-3" />
-                      </button>
-                    </div>
-                  ))}
-                </div>
+                          <button
+                              onClick={() => handleDelete(index)}
+                              type="button"
+                              className="absolute -top-3 -right-3 bg-red-500 p-2 rounded-lg text-white"
+                          >
+                            <XIcon className="w-3 h-3"/>
+                          </button>
+                        </div>
+                    ))}
+                  </div>
               ) : (
-                <UploadDropzone
-                  endpoint="imageUploader"
-                  onClientUploadComplete={(res) => {
-                    setImages(res.map((r) => r.url));
-                  }}
-                  onUploadError={() => {
-                    alert("Something went wrong");
-                  }}
-                />
+                  <UploadDropzone
+                      endpoint="imageUploader"
+                      onClientUploadComplete={(res) => {
+                        setImages(res.map((r) => r.url));
+                      }}
+                      onUploadError={() => {
+                        alert("Something went wrong");
+                      }}
+                  />
               )}
 
               <p className="text-red-500">{fields.images.errors}</p>
@@ -206,7 +217,7 @@ export default function ProductCreateRoute() {
           </div>
         </CardContent>
         <CardFooter>
-          <SubmitButton text="Create Product" />
+          <SubmitButton text="Create Product"/>
         </CardFooter>
       </Card>
     </form>

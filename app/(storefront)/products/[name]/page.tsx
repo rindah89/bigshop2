@@ -44,6 +44,28 @@ async function getData(productCategory: string) {
         data: data,
       };
     }
+
+    case "televisions": {
+      const data = await prisma.product.findMany({
+        where: {
+          status: "published",
+          category: "televisions",
+        },
+        select: {
+          name: true,
+          images: true,
+          price: true,
+          id: true,
+          description: true,
+        },
+      });
+
+      return {
+        title: "Televsions",
+        data: data,
+      };
+    }
+
     case "laptops": {
       const data = await prisma.product.findMany({
         where: {
@@ -81,6 +103,68 @@ async function getData(productCategory: string) {
 
       return {
         title: "General Electronics",
+        data: data,
+      };
+    }
+    case "cameras": {
+      const data = await prisma.product.findMany({
+        where: {
+          status: "published",
+          category: "cameras",
+        },
+        select: {
+          name: true,
+          images: true,
+          price: true,
+          id: true,
+          description: true,
+        },
+      });
+
+      return {
+        title: "Cameras",
+        data: data,
+      };
+    }
+
+    case "phoneCases": {
+      const data = await prisma.product.findMany({
+        where: {
+          status: "published",
+          category: "phoneCases",
+        },
+        select: {
+          name: true,
+          images: true,
+          price: true,
+          id: true,
+          description: true,
+        },
+      });
+
+      return {
+        title: "Phone Cases",
+        data: data,
+      };
+    }
+
+    case "headphones": {
+      const data = await prisma.product.findMany({
+        where: {
+          status: "published",
+          category: "headphones",
+        },
+        select: {
+          name: true,
+          images: true,
+          price: true,
+          id: true,
+          description: true,
+        },
+      });
+
+      return {
+        title: "Headphones",
         data: data,
       };
     }

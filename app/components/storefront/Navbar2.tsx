@@ -49,6 +49,32 @@ const navigation = [
   },
   {
     id: 4,
+    name: "Headphones",
+    href: "/products/headphones",
+    current: false,
+  },
+
+  {
+    id: 5,
+    name: "Television Screens",
+    href: "/products/televisions",
+    current: false,
+  },
+
+  {
+    id: 6,
+    name: "Phone Cases",
+    href: "/products/phoneCases",
+    current: false,
+  },
+  {
+    id: 7,
+    name: "Cameras",
+    href: "/products/cameras",
+    current: false,
+  },
+  {
+    id: 6,
     name: "General Electronics",
     href: "/products/general",
     current: false,
@@ -69,7 +95,7 @@ export default async function Navbar2() {
 
   return (
     <Disclosure as="nav" className="bg-black">
-      <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+      <div className="mx-auto w-full px-2 sm:px-6 lg:px-8">
         <div className="relative flex h-30 items-center justify-between">
           <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
             {/* Mobile menu button */}
@@ -86,7 +112,7 @@ export default async function Navbar2() {
               />
             </DisclosureButton>
           </div>
-          <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+          <div className="flex flex-2 items-center justify-center sm:items-stretch sm:justify-start">
             <div className="flex flex-shrink-0 items-center">
               <img
                 alt="Big Store"
